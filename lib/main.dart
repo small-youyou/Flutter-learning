@@ -1,20 +1,17 @@
 import 'package:flutter/material.dart';
-import 'package:english_words/english_words.dart';
+import 'tags/TagChipDemo.dart';
 
 void main() => runApp(new MyApp());
 
-class MyApp extends StatefulWidget {
-  MyApp({Key key}) : super(key: key);
+class MyApp extends StatelessWidget {
+  const MyApp({Key key}) : super(key: key);
 
-  @override
-  _MyAppState createState() => _MyAppState();
-}
-
-class _MyAppState extends State<MyApp> {
   @override
   Widget build(BuildContext context) {
-    return Container(
-      child: child,
+    return MaterialApp(
+      debugShowCheckedModeBanner: false,
+      home: TagChipDemo(),
+      theme: ThemeData(),
     );
   }
 }

@@ -71,7 +71,7 @@ class _TagState extends State<TagChipDemo> {
                 SizedBox(height: 15),
                 ActionChip(
                   label: Text(
-                    "新增关键词",
+                    "新建关键词",
                     style: TextStyle(color: Colors.white),
                   ),
                   backgroundColor: Colors.blue,

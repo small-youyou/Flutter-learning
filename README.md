@@ -1,6 +1,12 @@
+<<<<<<< HEAD
 # weitong
 
 A new Flutter application.
+=======
+# demo
+
+A new Flutter project.
+>>>>>>> 2cfa626897d7637935f13b884bfa3e96ff5ad5ee
 
 ## Getting Started
 

@@ -17,13 +17,13 @@ class _LoginPageState extends State<LoginPage> {
     return Container(
         child: Scaffold(
             appBar: AppBar(
-              leading: IconButton(
-                icon: Icon(Icons.close),
-                onPressed: () {
-                  Navigator.pop(context);
-                },
-              ),
-              // title: Text("登录页面"),
+              // leading: IconButton(
+              //   icon: Icon(Icons.close),
+              //   onPressed: () {
+              //     Navigator.pop(context);
+              //   },
+              // ),
+              title: Text("登录页面"),
               actions: <Widget>[
                 FlatButton(
                   child: Text("客服"),

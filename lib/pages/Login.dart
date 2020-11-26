@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+import 'package:weitong/pages/tabs/Tabs.dart';
 import '../services/ScreenAdapter.dart';
 import '../widget/JdText.dart';
 import '../widget/JdButton.dart';
@@ -87,11 +89,28 @@ class _LoginPageState extends State<LoginPage> {
                     text: "登入",
                     color: Color.fromRGBO(111, 111, 111, 0.9),
                     cb: () {
-                      Navigator.pushNamed(context, '/initTags');
+                      _loginAction();
+                      // Navigator.pushNamed(context, '/initTags');
                     },
                   )
                 ],
               ),
             )));
+  }
+
+  void _saveUserInfo(String id, String token) async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    // prefs.setString("id", id);
+    prefs.setString("token", token);
+    // prefs.setString("phone", _assount.text);
+    // prefs.setString("password", _password.text);
+  }
+
+  void _loginAction() {
+    //post
+    _saveUserInfo("", "demotoken");
+    Navigator.of(context).pushAndRemoveUntil(
+        new MaterialPageRoute(builder: (context) => new Tabs()),
+        (route) => route == null);
   }
 }

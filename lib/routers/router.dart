@@ -4,14 +4,12 @@
 
 import 'package:flutter/material.dart';
 import '../pages/tabs/Tabs.dart';
-import '../pages/Login.dart';
 import '../pages/tags/TagChipDemo.dart';
 import '../pages/tags/TagTextFieldDemo.dart';
 
 //配置路由
 final routes = {
   '/': (context) => Tabs(),
-  '/login': (context) => LoginPage(),
   '/initTags': (context) => TagChipDemo(),
   '/inputNewTag': (context) => TextFieldDemo(),
 };

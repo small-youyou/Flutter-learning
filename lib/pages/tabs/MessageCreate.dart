@@ -15,6 +15,7 @@ class _MessageCreateState extends State<MessageCreate> {
 
   String _actionChipString = "选择关键词";
   IconData _actionChipIconData = Icons.add;
+  List<Widget> _containerList;
 
   @override
   Widget build(BuildContext context) {
@@ -23,80 +24,99 @@ class _MessageCreateState extends State<MessageCreate> {
             child: SingleChildScrollView(
       child: Container(
         padding: EdgeInsets.all(20),
-        child: Column(children: <Widget>[
-          Column(
-              mainAxisAlignment: MainAxisAlignment.start,
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: <Widget>[
-                Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: <Widget>[
-                      Row(
-                        children: [
-                          Text("关键词:"),
-                          SizedBox(
-                            width: 15,
+        child: Column(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: <Widget>[
+              Column(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: _containerList = [
+                    Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: <Widget>[
+                          Row(
+                            children: [
+                              Text("关键词:"),
+                              SizedBox(
+                                width: 15,
+                              ),
+                              ActionChip(
+                                label: Text(
+                                  _actionChipString,
+                                  style: TextStyle(color: Colors.white),
+                                ),
+                                backgroundColor: Colors.blue,
+                                onPressed: () {
+                                  //_awaitReturnNewTag(context);
+                                  _awaitReturnChooseTag(context);
+                                },
+                                avatar: Icon(
+                                  _actionChipIconData,
+                                  color: Colors.white,
+                                ),
+                              ),
+                            ],
                           ),
-                          ActionChip(
-                            label: Text(
-                              _actionChipString,
-                              style: TextStyle(color: Colors.white),
+                          FlatButton(
+                              onPressed: () {
+                                Navigator.pushNamed(context, '/updateTags');
+                              },
+                              child: Text("管理关键词")),
+                        ]),
+                    Divider(),
+                    Form(
+                      key: newTitleFormKey,
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.start,
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          TextFormField(
+                            // controller: textFieldController,
+                            style: TextStyle(
+                              color: Colors.black,
                             ),
-                            backgroundColor: Colors.blue,
-                            onPressed: () {
-                              //_awaitReturnNewTag(context);
-                              _awaitReturnChooseTag(context);
+                            decoration: InputDecoration(
+                                icon: Icon(Icons.title),
+                                labelText: "标题",
+                                // border: OutlineInputBorder(),
+                                hintText: "标题需包含关键词"),
+                            onSaved: (value) {
+                              newTitle = value;
                             },
-                            avatar: Icon(
-                              _actionChipIconData,
-                              color: Colors.white,
-                            ),
+                            validator: _validateNewTitle,
                           ),
                         ],
                       ),
-                      FlatButton(
-                          onPressed: () {
-                            Navigator.pushNamed(context, '/updateTags');
-                          },
-                          child: Text("管理关键词")),
-                    ]),
-                SizedBox(height: 15.0),
-                Form(
-                  key: newTitleFormKey,
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.start,
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      TextFormField(
-                        // controller: textFieldController,
-                        style: TextStyle(
-                          fontSize: 17,
-                          color: Colors.black,
-                        ),
+                    ),
+                    Divider(),
+                    Container(
+                      child: TextField(
+                        minLines: 18,
+                        keyboardType: TextInputType.multiline,
+                        maxLines: null,
                         decoration: InputDecoration(
-                            icon: Icon(Icons.title),
-                            labelText: "新建标题",
-                            border: OutlineInputBorder(),
-                            hintText: "新建标题需包含关键词"),
-                        onSaved: (value) {
-                          newTitle = value;
-                        },
-                        validator: _validateNewTitle,
+                            border: OutlineInputBorder(), hintText: "输入内容"),
                       ),
-                      SizedBox(
-                        height: 32.0,
-                      ),
-                    ],
-                  ),
-                )
-              ]),
-          JdButton(
-            text: "发送",
-            cb: () {
-              _sendMessage();
-            },
-          ),
-        ]),
+                    ),
+                    Divider(),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceAround,
+                      children: [
+                        FlatButton(
+                            onPressed: () {}, child: Icon(Icons.note_add)),
+                        FlatButton(onPressed: () {}, child: Icon(Icons.mic)),
+                        FlatButton(
+                            onPressed: () {}, child: Icon(Icons.video_call)),
+                      ],
+                    ),
+                  ]),
+              JdButton(
+                text: "发送",
+                cb: () {
+                  _sendMessage();
+                },
+              ),
+            ]),
       ),
     )));
   }
@@ -115,9 +135,10 @@ class _MessageCreateState extends State<MessageCreate> {
   _awaitReturnChooseTag(BuildContext context) async {
     print("open choose Tags");
     final chosedTag = await Navigator.pushNamed(context, '/chooseTags');
-
-    _curchosedTag = chosedTag;
-    _updateChooseTagButton();
+    if (chosedTag != null) {
+      _curchosedTag = chosedTag;
+      _updateChooseTagButton();
+    }
   }
 
   _updateChooseTagButton() {

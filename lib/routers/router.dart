@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:weitong/pages/tabs/Message.dart';
+import 'package:weitong/pages/tags/TagChoiceChipDemo.dart';
 import '../pages/tabs/Tabs.dart';
 import '../pages/tags/TagChipDemo.dart';
 import '../pages/tags/TagTextFieldDemo.dart';
@@ -7,8 +8,9 @@ import '../pages/tags/TagTextFieldDemo.dart';
 //配置路由
 final routes = {
   '/': (context) => Tabs(),
-  '/initTags': (context) => TagChipDemo(),
+  '/updateTags': (context) => TagChipDemo(),
   '/inputNewTag': (context) => TextFieldDemo(),
+  '/chooseTags': (context) => TagChoiceChipDemo(),
 };
 
 //固定写法

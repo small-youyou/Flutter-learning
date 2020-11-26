@@ -84,7 +84,7 @@ class _LoginPageState extends State<LoginPage> {
                   ),
                   SizedBox(height: 20),
                   JdButton(
-                    text: "登入",
+                    text: "登录",
                     color: Color.fromRGBO(111, 111, 111, 0.9),
                     cb: () {
                       Navigator.pushNamed(context, '/initTags');

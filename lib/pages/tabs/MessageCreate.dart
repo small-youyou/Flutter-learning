@@ -145,7 +145,7 @@ class _MessageCreateState extends State<MessageCreate> {
     if (_curchosedTag != '') {
       setState(() {
         _actionChipString = _curchosedTag;
-        _actionChipIconData = Icons.edit;
+        _actionChipIconData = Icons.turned_in_not;
       });
     } else {
       print("null");

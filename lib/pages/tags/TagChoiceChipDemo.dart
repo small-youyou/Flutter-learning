@@ -3,12 +3,12 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'package:weitong/widget/JdButton.dart';
 import 'TagTextFieldDemo.dart';
 
-class TagChipDemo extends StatefulWidget {
+class TagChoiceChipDemo extends StatefulWidget {
   @override
-  _TagState createState() => _TagState();
+  _TagChoiceState createState() => _TagChoiceState();
 }
 
-class _TagState extends State<TagChipDemo> {
+class _TagChoiceState extends State<TagChoiceChipDemo> {
   @override
   List<String> _tags = [
     '111',
@@ -57,14 +57,15 @@ class _TagState extends State<TagChipDemo> {
                 Wrap(
                   spacing: 8.0,
                   children: _tags.map((tag) {
-                    return Chip(
+                    return ChoiceChip(
                       label: Text(tag),
-                      onDeleted: () {
-                        setState(() {
-                          _tags.remove(tag);
-                        });
-                      },
-                      deleteButtonTooltipMessage: "删除这个关键词",
+                      // onDeleted: () {
+                      //   setState(() {
+                      //     _tags.remove(tag);
+                      //   });
+                      // },
+                      // deleteButtonTooltipMessage: "删除这个关键词",
+                      onSelected: ,
                     );
                   }).toList(),
                 ),

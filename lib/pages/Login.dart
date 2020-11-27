@@ -7,13 +7,15 @@ import '../widget/JdButton.dart';
 import '../routers/router.dart';
 
 class LoginPage extends StatefulWidget {
-  LoginPage({Key key}) : super(key: key);
+  String role;
+  LoginPage({Key key, this.role = "user"}) : super(key: key);
 
   @override
   _LoginPageState createState() => _LoginPageState();
 }
 
 class _LoginPageState extends State<LoginPage> {
+  String role = "users";
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -64,26 +66,50 @@ class _LoginPageState extends State<LoginPage> {
                     },
                   ),
                   SizedBox(height: 10),
-                  Container(
-                    padding: EdgeInsets.all(ScreenAdapter.width(20)),
-                    child: Stack(
-                      children: [
-                        Align(
-                          alignment: Alignment.centerLeft,
-                          child: Text('忘记密码'),
-                        ),
-                        Align(
-                          alignment: Alignment.centerRight,
-                          child: InkWell(
-                            onTap: () {
-                              Navigator.pushNamed(context, '/registerFirst');
-                            },
-                            child: Text('新用户注册'),
-                          ),
-                        )
-                      ],
+                  // Container(
+                  //   padding: EdgeInsets.all(ScreenAdapter.width(20)),
+                  //   child: Stack(
+                  //     children: [
+                  //       Align(
+                  //         alignment: Alignment.centerLeft,
+                  //         child: Text('忘记密码'),
+                  //       ),
+                  //       Align(
+                  //         alignment: Alignment.centerRight,
+                  //         child: InkWell(
+                  //           onTap: () {
+                  //             Navigator.pushNamed(context, '/registerFirst');
+                  //           },
+                  //           child: Text('新用户注册'),
+                  //         ),
+                  //       )
+                  //     ],
+                  //   ),
+                  // ),
+
+                  Row(mainAxisAlignment: MainAxisAlignment.center, children: [
+                    Text("用户:"),
+                    Radio(
+                      value: "user",
+                      groupValue: this.role,
+                      onChanged: (value) {
+                        setState(() {
+                          this.role = value;
+                        });
+                      },
                     ),
-                  ),
+                    Text("管理员:"),
+                    Radio(
+                      value: "admin",
+                      groupValue: this.role,
+                      onChanged: (value) {
+                        setState(() {
+                          this.role = value;
+                        });
+                      },
+                    ),
+                  ]),
+
                   SizedBox(height: 20),
                   JdButton(
                     text: "登录",
@@ -107,10 +133,14 @@ class _LoginPageState extends State<LoginPage> {
   }
 
   void _loginAction() {
+    if (this.role == "user") {
+      _saveUserInfo("", "demotoken");
+      Navigator.of(context).pushAndRemoveUntil(
+          new MaterialPageRoute(builder: (context) => new Tabs()),
+          (route) => route == null);
+    } else {
+      print("进入管理员界面");
+    }
     //post
-    _saveUserInfo("", "demotoken");
-    Navigator.of(context).pushAndRemoveUntil(
-        new MaterialPageRoute(builder: (context) => new Tabs()),
-        (route) => route == null);
   }
 }

@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:weitong/widget/JdButton.dart';
-import 'TagTextFieldDemo.dart';
 
 class TagChoiceChipDemo extends StatefulWidget {
   @override
@@ -15,17 +14,8 @@ class _TagChoiceState extends State<TagChoiceChipDemo> {
     '222',
     '333',
   ];
-
+  String _choice = "";
   // void initState() {}
-
-  _awaitReturnNewTag(BuildContext context) async {
-    final newTag = await Navigator.pushNamed(context, '/inputNewTag');
-    if (newTag != null) {
-      setState(() {
-        _tags.add(newTag);
-      });
-    }
-  }
 
   Widget build(BuildContext context) {
     return Scaffold(
@@ -50,7 +40,7 @@ class _TagChoiceState extends State<TagChoiceChipDemo> {
               children: <Widget>[
                 SizedBox(height: 15),
                 Text(
-                  "添加您的关键词",
+                  "选择您的关键词",
                   style: TextStyle(fontSize: 32.0),
                 ),
                 SizedBox(height: 15),
@@ -59,6 +49,13 @@ class _TagChoiceState extends State<TagChoiceChipDemo> {
                   children: _tags.map((tag) {
                     return ChoiceChip(
                       label: Text(tag),
+                      selected: _choice == tag,
+                      // selectedColor: Theme.of(context).accentColor,
+                      onSelected: (value) {
+                        setState(() {
+                          _choice = tag;
+                        });
+                      },
                       // onDeleted: () {
                       //   setState(() {
                       //     _tags.remove(tag);
@@ -70,20 +67,7 @@ class _TagChoiceState extends State<TagChoiceChipDemo> {
                   }).toList(),
                 ),
                 SizedBox(height: 15),
-                ActionChip(
-                  label: Text(
-                    "新建关键词",
-                    style: TextStyle(color: Colors.white),
-                  ),
-                  backgroundColor: Colors.blue,
-                  onPressed: () {
-                    _awaitReturnNewTag(context);
-                  },
-                  avatar: Icon(
-                    Icons.add,
-                    color: Colors.white,
-                  ),
-                ),
+                Text("已选择关键词: $_choice"),
                 SizedBox(height: 15),
                 Divider(
                   color: Colors.black12,
@@ -94,14 +78,14 @@ class _TagChoiceState extends State<TagChoiceChipDemo> {
                 JdButton(
                   text: '完成',
                   cb: () {
-                    _saveTags();
+                    _sendDataBack(context);
                   },
                 ),
               ]),
         ))));
   }
 
-  void _saveTags() async {
-    Navigator.pushNamed(context, '/');
+  void _sendDataBack(BuildContext context) {
+    Navigator.pop(context, _choice);
   }
 }

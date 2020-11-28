@@ -50,7 +50,7 @@ class _TagState extends State<TagChipDemo> {
               children: <Widget>[
                 SizedBox(height: 15),
                 Text(
-                  "添加您的关键词",
+                  "管理您的关键词",
                   style: TextStyle(fontSize: 32.0),
                 ),
                 SizedBox(height: 15),
@@ -74,7 +74,7 @@ class _TagState extends State<TagChipDemo> {
                     "新建关键词",
                     style: TextStyle(color: Colors.white),
                   ),
-                  backgroundColor: Colors.blue,
+                  backgroundColor: Theme.of(context).accentColor,
                   onPressed: () {
                     _awaitReturnNewTag(context);
                   },
@@ -101,6 +101,7 @@ class _TagState extends State<TagChipDemo> {
   }
 
   void _saveTags() async {
-    Navigator.pushNamed(context, '/');
+    //执行保存操作
+    Navigator.of(context).pop();
   }
 }

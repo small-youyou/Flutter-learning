@@ -15,7 +15,12 @@ class Tabs extends StatefulWidget {
 
 class _TabsState extends State<Tabs> {
   int _currentIndex = 0;
-  List _pagelist = [MessagePage(), MessageCreate(), LogRecordPage(), User()];
+  List _pagelist = [
+    MessagePage(),
+    MessageCreate(),
+    LogRecordPage(),
+    UserPage()
+  ];
   // List _pagelist = [Message(), MessageCreate(), LogRecord(), User()];
   @override
   void initState() {

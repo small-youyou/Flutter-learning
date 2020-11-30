@@ -4,6 +4,7 @@ import 'package:weitong/pages/tags/TagChoiceChipDemo.dart';
 import '../pages/tabs/Tabs.dart';
 import '../pages/tags/TagChipDemo.dart';
 import '../pages/tags/TagTextFieldDemo.dart';
+import '../pages/Admin/AdminTabs.dart';
 
 //配置路由
 final routes = {
@@ -11,6 +12,7 @@ final routes = {
   '/updateTags': (context) => TagChipDemo(),
   '/inputNewTag': (context) => TextFieldDemo(),
   '/chooseTags': (context) => TagChoiceChipDemo(),
+  '/admin': (context) => AdminTabs()
 };
 
 //固定写法

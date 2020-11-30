@@ -5,6 +5,11 @@ import '../services/ScreenAdapter.dart';
 import '../widget/JdText.dart';
 import '../widget/JdButton.dart';
 import '../routers/router.dart';
+import 'package:dio/dio.dart';
+import '../Model/UserModel.dart';
+import 'dart:convert' as convert;
+
+import 'package:fluttertoast/fluttertoast.dart';
 
 class LoginPage extends StatefulWidget {
   String role;
@@ -16,6 +21,8 @@ class LoginPage extends StatefulWidget {
 
 class _LoginPageState extends State<LoginPage> {
   String role = "users";
+  String id;
+  String password;
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -54,7 +61,7 @@ class _LoginPageState extends State<LoginPage> {
                   JdText(
                     text: "请输入用户名",
                     onChanged: (value) {
-                      print(value);
+                      this.id = value;
                     },
                   ),
                   SizedBox(height: 10),
@@ -62,7 +69,7 @@ class _LoginPageState extends State<LoginPage> {
                     text: "请输入密码",
                     password: true,
                     onChanged: (value) {
-                      print(value);
+                      this.password = value;
                     },
                   ),
                   SizedBox(height: 10),
@@ -132,15 +139,33 @@ class _LoginPageState extends State<LoginPage> {
     // prefs.setString("password", _password.text);
   }
 
-  void _loginAction() {
-    if (this.role == "user") {
+  void _loginAction() async {
+    var rel = await Dio().post("http://47.110.150.159:8080/login",
+        data: {"id": id, "password": password});
+    var rel2 = convert.jsonDecode(rel.data);
+    var result = new UserItemModel.fromJson(rel2);
+    if (this.role == "user" && result.code == "200") {
       _saveUserInfo("", "demotoken");
       Navigator.of(context).pushAndRemoveUntil(
           new MaterialPageRoute(builder: (context) => new Tabs()),
           (route) => route == null);
+    } else if (this.role == "admin" && result.code == "200") {
+      Navigator.pushNamed(context, "/admin");
     } else {
-      print("进入管理员界面");
+      AlertMesaage();
     }
+
     //post
+  }
+
+  AlertMesaage() {
+    Fluttertoast.showToast(
+        msg: "用户名或密码错误",
+        toastLength: Toast.LENGTH_LONG,
+        gravity: ToastGravity.BOTTOM, // 消息框弹出的位置
+        timeInSecForIos: 1, // 消息框持续的时间（目前的版本只有ios有效）
+        backgroundColor: Colors.red,
+        textColor: Colors.white,
+        fontSize: 16.0);
   }
 }

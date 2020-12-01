@@ -15,9 +15,9 @@ class _AdminTabsState extends State<AdminTabs> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text("微通"),
-      ),
+      // appBar: AppBar(
+      //   title: Text("微通"),
+      // ),
       floatingActionButton: FloatingActionButton(
         child: Icon(Icons.delete),
         onPressed: () {

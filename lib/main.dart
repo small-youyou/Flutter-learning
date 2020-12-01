@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:weitong/pages/Admin/searchDemo.dart';
 import 'pages/tabs/Tabs.dart';
 import 'routers/router.dart';
 import 'pages/Login.dart';
@@ -18,7 +19,7 @@ class _MyAppState extends State<MyApp> {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      // home: Tabs(),
+      // home: SearchDemo(),
       initialRoute: '/',
       onGenerateRoute: onGenerateRoute,
     );

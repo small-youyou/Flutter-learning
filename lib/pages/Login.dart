@@ -4,12 +4,13 @@ import 'package:weitong/pages/tabs/Tabs.dart';
 import '../services/ScreenAdapter.dart';
 import '../widget/JdText.dart';
 import '../widget/JdButton.dart';
-import '../routers/router.dart';
 import 'package:dio/dio.dart';
 import '../Model/UserModel.dart';
 import 'dart:convert' as convert;
 
 import 'package:fluttertoast/fluttertoast.dart';
+
+import 'Admin/AdminTabs.dart';
 
 class LoginPage extends StatefulWidget {
   String role;
@@ -144,13 +145,16 @@ class _LoginPageState extends State<LoginPage> {
         data: {"id": id, "password": password});
     var rel2 = convert.jsonDecode(rel.data);
     var result = new UserItemModel.fromJson(rel2);
+
     if (this.role == "user" && result.code == "200") {
       _saveUserInfo("", "demotoken");
       Navigator.of(context).pushAndRemoveUntil(
           new MaterialPageRoute(builder: (context) => new Tabs()),
           (route) => route == null);
     } else if (this.role == "admin" && result.code == "200") {
-      Navigator.pushNamed(context, "/admin");
+      Navigator.of(context).pushAndRemoveUntil(
+          new MaterialPageRoute(builder: (context) => new AdminTabs()),
+          (route) => route == null);
     } else {
       AlertMesaage();
     }

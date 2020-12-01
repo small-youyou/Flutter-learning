@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+//在这里管理人员权限(方框,连线)
 class StaffManagePage extends StatefulWidget {
   StaffManagePage({Key key}) : super(key: key);
 
@@ -10,6 +11,10 @@ class StaffManagePage extends StatefulWidget {
 class _StaffManagePageState extends State<StaffManagePage> {
   @override
   Widget build(BuildContext context) {
-    return Container(child: Text("人员管理界面"));
+    return Scaffold(
+      appBar: AppBar(
+        title: Text("安全生产经营管理体系"),
+      ),
+    );
   }
 }

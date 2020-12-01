@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:weitong/pages/Admin/AddUser.dart';
 import 'package:weitong/pages/tabs/Message.dart';
 import 'package:weitong/pages/tags/TagChoiceChipDemo.dart';
 import '../pages/tabs/Tabs.dart';
@@ -12,7 +13,8 @@ final routes = {
   '/updateTags': (context) => TagChipDemo(),
   '/inputNewTag': (context) => TextFieldDemo(),
   '/chooseTags': (context) => TagChoiceChipDemo(),
-  '/admin': (context) => AdminTabs()
+  '/admin': (context) => AdminTabs(),
+  '/addUser': (context) => AddUser(),
 };
 
 //固定写法

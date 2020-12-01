@@ -29,26 +29,7 @@ class AddUser extends StatelessWidget {
                 SizedBox(
                   height: 32.0,
                 ),
-                TextFormField(
-                  // controller: textFieldController,
-                  //只允许输入数字
-                  keyboardType: TextInputType.phone,
-                  // style: TextStyle(
-                  //   fontSize: 17,
-                  //   color: Colors.black,
-                  // ),
-                  decoration: InputDecoration(
-                      icon: Icon(Icons.subject),
-                      labelText: "用户名（手机号）",
-                      hintText: "请输入手机号"),
-                  onSaved: (value) {
-                    id = value;
-                  },
-                  validator: _validateNewId,
-                ),
-                SizedBox(
-                  height: 32.0,
-                ),
+
                 TextFormField(
                   // controller: textFieldController,
 
@@ -62,6 +43,26 @@ class AddUser extends StatelessWidget {
                       hintText: "请输入姓名"),
                   onSaved: (value) {
                     name = value;
+                  },
+                  validator: _validateNewId,
+                ),
+                SizedBox(
+                  height: 32.0,
+                ),
+                TextFormField(
+                  // controller: textFieldController,
+                  //只允许输入数字
+                  keyboardType: TextInputType.phone,
+                  // style: TextStyle(
+                  //   fontSize: 17,
+                  //   color: Colors.black,
+                  // ),
+                  decoration: InputDecoration(
+                      icon: Icon(Icons.subject),
+                      labelText: "手机号",
+                      hintText: "请输入手机号"),
+                  onSaved: (value) {
+                    id = value;
                   },
                   validator: _validateNewId,
                 ),
@@ -121,6 +122,7 @@ class AddUser extends StatelessWidget {
                   },
                   validator: _validateNewId,
                 ),
+                Divider(),
                 JdButton(
                   text: '确定',
                   cb: () {

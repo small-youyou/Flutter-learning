@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:weitong/pages/Admin/UserDetails.dart';
 
 class UserSliverList extends StatefulWidget {
   List<Map> users;
@@ -20,16 +21,28 @@ class _UserSliverListState extends State<UserSliverList> {
         delegate: SliverChildBuilderDelegate(
       (BuildContext context, int index) {
         return Padding(
-            padding: EdgeInsets.only(bottom: 32),
-            child: Material(
-              borderRadius: BorderRadius.circular(12.0),
-              elevation: 14.0,
-              shadowColor: Colors.grey.withOpacity(0.5),
-              child: Container(
+          padding: EdgeInsets.only(bottom: 32),
+          child: Material(
+            borderRadius: BorderRadius.circular(12.0),
+            elevation: 14.0,
+            shadowColor: Colors.grey.withOpacity(0.5),
+            child: Container(
                 padding: EdgeInsets.all(20),
-                child: Text(users[index]["name"]),
-              ),
-            ));
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Text(users[index]["name"]),
+                    IconButton(
+                        icon: Icon(Icons.more_horiz),
+                        onPressed: () {
+                          print("按钮点击");
+                          Navigator.of(context).push(MaterialPageRoute(
+                              builder: (context) => UserDetails(users[index])));
+                        })
+                  ],
+                )),
+          ),
+        );
       },
       childCount: users.length,
     ));

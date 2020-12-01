@@ -146,9 +146,9 @@ class AddUser extends StatelessWidget {
     newUserFormKey.currentState.save();
     if (newUserFormKey.currentState.validate()) {
       Map mapToSendBack = {
+        "name": name,
         "id": id,
         "password": password,
-        "name": name,
         "job": job,
       };
       Navigator.pop(context, mapToSendBack);

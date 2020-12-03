@@ -19,12 +19,12 @@ class _AdminTabsState extends State<AdminTabs> {
       // appBar: AppBar(
       //   title: Text("微通"),
       // ),
-      floatingActionButton: FloatingActionButton(
-        child: Icon(Icons.delete),
-        onPressed: () {
-          // _cleanToken();
-        },
-      ),
+      // floatingActionButton: FloatingActionButton(
+      //   child: Icon(Icons.delete),
+      //   onPressed: () {
+      //     // _cleanToken();
+      //   },
+      // ),
       body: this._pagelist[this._currentIndex],
       bottomNavigationBar: BottomNavigationBar(
         currentIndex: this._currentIndex,

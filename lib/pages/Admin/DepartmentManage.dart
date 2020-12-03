@@ -12,6 +12,30 @@ List<Map> users = [
     "password": 123456,
     "job": "员工",
   },
+  {
+    "name": "李四",
+    "id": 13564621687,
+    "password": 123456,
+    "job": "员工",
+  },
+  {
+    "name": "王五",
+    "id": 13411112222,
+    "password": 123456,
+    "job": "员工",
+  },
+  {
+    "name": "无无无",
+    "id": 13411112222,
+    "password": 123456,
+    "job": "员工",
+  },
+  {
+    "name": "张三",
+    "id": 13411112222,
+    "password": 123456,
+    "job": "员工",
+  },
 ];
 
 //在这里管理人员详细信息,添加人员
@@ -44,33 +68,43 @@ class _DepartmentManagePageState extends State<DepartmentManagePage> {
   // }
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text("人员信息"),
-        actions: [
-          IconButton(
-            icon: Icon(Icons.search),
-            onPressed: () {
-              showSearch(context: context, delegate: SearchBarDelegate(users));
-            },
-          ),
-          IconButton(
+        appBar: AppBar(
+          title: Text("人员信息"),
+          actions: [
+            IconButton(
+              icon: Icon(Icons.search),
               onPressed: () {
-                print("addUser");
-                _addUser(context);
+                showSearch(
+                    context: context, delegate: SearchBarDelegate(users));
               },
-              icon: Icon(Icons.add)),
-        ],
-      ),
-      body: CustomScrollView(
-        slivers: <Widget>[
-          SliverSafeArea(
-              sliver: SliverPadding(
-            padding: EdgeInsets.all(20),
-            sliver: UserSliverList(users),
-          ))
-        ],
-      ),
-    );
+            ),
+            IconButton(
+                onPressed: () {
+                  print("addUser");
+                  _addUser(context);
+                },
+                icon: Icon(Icons.add)),
+          ],
+        ),
+        body: Column(
+          children: [
+            // Container(
+            //   padding: EdgeInsets.all(20),
+            //   child: Text("总人数: ${users.length} 人"),
+            // ),
+            Expanded(
+              child: CustomScrollView(
+                slivers: <Widget>[
+                  SliverSafeArea(
+                      sliver: SliverPadding(
+                    padding: EdgeInsets.all(20),
+                    sliver: UserSliverList(users),
+                  ))
+                ],
+              ),
+            )
+          ],
+        ));
   }
 
   _addUser(BuildContext context) async {

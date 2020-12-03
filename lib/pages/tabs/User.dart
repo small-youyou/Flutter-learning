@@ -1,7 +1,11 @@
 //https://material.io/tools/icons/?icon=favorite&style=baseline
 
 import 'package:flutter/material.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+import 'package:weitong/widget/JdButton.dart';
 import '../../services/ScreenAdapter.dart';
+import '../Login.dart';
+import 'Tabs.dart';
 
 class UserPage extends StatefulWidget {
   UserPage({Key key}) : super(key: key);
@@ -66,9 +70,23 @@ class _UserPageState extends State<UserPage> {
           ListTile(
             leading: Icon(Icons.settings),
             title: Text("设置"),
+          ),
+          JdButton(
+            text: "退出登录",
+            cb: () {
+              Navigator.of(context).pushAndRemoveUntil(
+                  new MaterialPageRoute(builder: (context) => new LoginPage()),
+                  (route) => route == null);
+              cleanToken();
+            },
           )
         ],
       ),
     );
+  }
+
+  Future<void> cleanToken() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    prefs.setString("token", null);
   }
 }

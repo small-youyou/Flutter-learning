@@ -12,7 +12,7 @@ class _LogRecordPageState extends State<LogRecordPage> {
   Widget build(BuildContext context) {
     return Container(
         child: Container(
-      child: Text("日志、草稿"),
+      child: Text("联系人"),
     ));
   }
 }

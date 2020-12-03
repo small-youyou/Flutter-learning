@@ -16,20 +16,13 @@ class AddUser extends StatelessWidget {
           child: Form(
             key: newUserFormKey,
             child: Column(
-              mainAxisAlignment: MainAxisAlignment.start,
+              mainAxisAlignment: MainAxisAlignment.spaceAround,
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                SizedBox(
-                  height: 32.0,
-                ),
                 Text(
                   "输入新增人员详情",
                   style: TextStyle(fontSize: 32.0),
                 ),
-                SizedBox(
-                  height: 32.0,
-                ),
-
                 TextFormField(
                   // controller: textFieldController,
 
@@ -44,11 +37,9 @@ class AddUser extends StatelessWidget {
                   onSaved: (value) {
                     name = value;
                   },
-                  validator: _validateNewId,
+                  validator: _validateNewName,
                 ),
-                SizedBox(
-                  height: 32.0,
-                ),
+
                 TextFormField(
                   // controller: textFieldController,
                   //只允许输入数字
@@ -66,9 +57,7 @@ class AddUser extends StatelessWidget {
                   },
                   validator: _validateNewId,
                 ),
-                SizedBox(
-                  height: 32.0,
-                ),
+
                 // TextFormField(
                 //   // controller: textFieldController,
                 //   // style: TextStyle(
@@ -100,11 +89,9 @@ class AddUser extends StatelessWidget {
                   onSaved: (value) {
                     password = value;
                   },
-                  validator: _validateNewId,
+                  validator: _validateNewPassword,
                 ),
-                SizedBox(
-                  height: 32.0,
-                ),
+
                 TextFormField(
                   // controller: textFieldController,
                   //只允许输入数字
@@ -120,7 +107,7 @@ class AddUser extends StatelessWidget {
                   onSaved: (value) {
                     job = value;
                   },
-                  validator: _validateNewId,
+                  validator: _validateNewJob,
                 ),
                 Divider(),
                 JdButton(
@@ -137,7 +124,29 @@ class AddUser extends StatelessWidget {
 
   String _validateNewId(value) {
     if (value.isEmpty) {
-      return "用户名不能为空";
+      return "手机号不能为空";
+    }
+
+    return null;
+  }
+
+  String _validateNewName(value) {
+    if (value.isEmpty) {
+      return "姓名不能为空";
+    }
+    return null;
+  }
+
+  String _validateNewJob(value) {
+    if (value.isEmpty) {
+      return "职务不能为空";
+    }
+    return null;
+  }
+
+  String _validateNewPassword(value) {
+    if (value.isEmpty) {
+      return "密码不能为空";
     }
     return null;
   }

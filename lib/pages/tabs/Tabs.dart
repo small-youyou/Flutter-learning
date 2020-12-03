@@ -62,7 +62,7 @@ class _TabsState extends State<Tabs> {
     }
   }
 
-  Future<void> _cleanToken() async {
+  Future<void> cleanToken() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     prefs.setString("token", null);
   }
@@ -72,12 +72,12 @@ class _TabsState extends State<Tabs> {
       appBar: AppBar(
         title: Text("微通"),
       ),
-      floatingActionButton: FloatingActionButton(
-        child: Icon(Icons.delete),
-        onPressed: () {
-          _cleanToken();
-        },
-      ),
+      // floatingActionButton: FloatingActionButton(
+      //   child: Icon(Icons.delete),
+      //   onPressed: () {
+      //     cleanToken();
+      //   },
+      // ),
       body: this._pagelist[this._currentIndex],
       bottomNavigationBar: BottomNavigationBar(
         currentIndex: this._currentIndex,
@@ -92,7 +92,7 @@ class _TabsState extends State<Tabs> {
           BottomNavigationBarItem(icon: Icon(Icons.textsms), title: Text("消息")),
           BottomNavigationBarItem(icon: Icon(Icons.create), title: Text("创建")),
           BottomNavigationBarItem(
-              icon: Icon(Icons.library_books), title: Text("草稿")),
+              icon: Icon(Icons.account_circle), title: Text("联系人")),
           BottomNavigationBarItem(icon: Icon(Icons.people), title: Text("我的"))
         ],
       ),

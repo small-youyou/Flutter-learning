@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'Mine.dart';
 import 'StaffManage.dart';
 import 'DepartmentManage.dart';
 
@@ -11,7 +12,7 @@ class AdminTabs extends StatefulWidget {
 
 class _AdminTabsState extends State<AdminTabs> {
   int _currentIndex = 0;
-  List _pagelist = [StaffManagePage(), DepartmentManagePage()];
+  List _pagelist = [StaffManagePage(), DepartmentManagePage(), Mine()];
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -35,11 +36,13 @@ class _AdminTabsState extends State<AdminTabs> {
         type: BottomNavigationBarType.fixed,
         fixedColor: Colors.red,
         items: [
-          BottomNavigationBarItem(icon: Icon(Icons.textsms), title: Text("消息")),
-          BottomNavigationBarItem(icon: Icon(Icons.create), title: Text("创建")),
+          BottomNavigationBarItem(
+              icon: Icon(Icons.account_balance), title: Text("体系")),
+          BottomNavigationBarItem(
+              icon: Icon(Icons.account_circle), title: Text("人员")),
           // BottomNavigationBarItem(
           //     icon: Icon(Icons.library_books), title: Text("草稿")),
-          // BottomNavigationBarItem(icon: Icon(Icons.people), title: Text("我的"))
+          BottomNavigationBarItem(icon: Icon(Icons.people), title: Text("我的"))
         ],
       ),
     );

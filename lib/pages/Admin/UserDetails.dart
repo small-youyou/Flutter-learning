@@ -1,5 +1,12 @@
 import "package:flutter/material.dart";
 
+Map name = {
+  "name": "姓名",
+  "id": "手机号",
+  "password": "密码",
+  "job": "职务",
+};
+
 class UserDetails extends StatelessWidget {
   Map details;
   UserDetails(Map details) {
@@ -67,7 +74,7 @@ class _UserDetailsSliverListState extends State<UserDetailsSliverList> {
               child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    Text(this.keys[index].toString()),
+                    Text(name[this.keys[index].toString()]),
                     Text(this.values[index].toString()),
                   ]),
             ),

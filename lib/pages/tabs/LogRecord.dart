@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import '../../widget/event_bus.dart';
 import 'package:flutter/material.dart';
 import 'package:rongcloud_im_plugin/rongcloud_im_plugin.dart';
@@ -30,7 +32,7 @@ class _LogRecordPageState extends State<LogRecordPage> {
     //     r"/storage/emulated/0/Pictures/Screenshots/1.jpg");
 
     Mybase64 =
-        await Base64Convert.image2Base64(r"/storage/emulated/0/Pictures/2.jpg");
+        await Base64Convert.image2Base64(r"/storage/emulated/0/Pictures/2.png");
     // String Mybase64 =
     //     Base64Convert.image2Base64(r"../../../images/1.jpg").toString();
     print(
@@ -44,16 +46,13 @@ class _LogRecordPageState extends State<LogRecordPage> {
   }
 
   showMyImage() {
-    print("复制的字符串：" +
-        "WzEzNywgODAsIDc4LCA3MSwgMTMsIDEwLCAyNiwgMTAsIDAsIDAsIDAsIDEzLCA3MywgNzIsIDY4LCA4MiwgMCwgMCwgMCwgODUsIDAsIDAsIDAsIDc3LCA4LCAyLCAwLCAwLCAwLCA4OCwgMTgsIDE5MSwgMjUxLCAwLCAwLCAyMiwgMTE2LCA3MywgNjgsIDY1LCA4NCwgMTIwLCAxLCAyMzcsIDkwLCAxMDUsIDE0NCwgOTMsIDE5NywgMTE3LCAyMzgsIDIxOSwgMTE5LCAxMjMsIDI1MSwgMjM2LCAxNTUsIDE5NiwgMTA0LCA3MCwgMjE5LCAzMiwgMTE4LCAzNSwgMTUzLCA2OSwgMTI4LCA5OSwgMjI4LCAzNiwgNDQsIDQ2LCAzLCAxNTAsIDY0LCAyMTYsIDU2LCA4NSwgMTYxLCA5OCwgMjI4LCAxNzMsIDc2LCA1NywgNjQsIDE5MiwgNzMsIDQyLCAzMywgMzMsIDEzNywgODMsIDI1NCwgNjUsIDIyNSwgMTc4LCAzMywgMjAsIDksIDIxLCAxMiwgMzgsIDE3NywgMTkyLCAyMCwgMTk0LCA2OSwgMTMwLCAxMzMsIDY5LCA4MSwgMjQsIDE5NiwgMzQsIDIwNCwgMzgsIDE0NCwgNCwgOTgsIDM2LCA1MiwgMTQ2LCA3MCwgMjUxLCAxMDQsIDEwMiwgNTIsIDExMSwgMTI3LCAxMTksIDIwNywgMTE5LCAxODYsIDIyMywgMTI1LCAyMDMsIDIwNCwgMTQ3LCAxNTIsIDQ5LCAxNjYsIDQyLCAxNzQsIDgxLCAyNDMsIDE4NCwgMjM0LCAyMTksIDIwMywgMjMzLCAyNDMsIDE1NywgMTE1LCAyNTAsIDI0NCwgMjMzLCAxMTUsIDcxLCA5LCAxMzAsIDEyOCwgODUsIDEzOSwgMTI0LCA4MywgMjAsIDE2NSwgMTc0LCA3MywgMTkwLCA4MywgOTUsIDkzLCA3OSwgNTYsIDE2NiwgMTA" +
-        "   结束了");
-
     // var Mybase64 = await Base64Convert.image2Base64(
     //     r"/storage/emulated/0/Pictures/Screenshots/1.jpg");
     print("-------******************测试显示图片***********************------------");
     print("测试显示图片");
     print(Mybase64);
-    return Base64Convert.base642Image(Mybase64);
+    var result = Base64Convert.base642Image(Mybase64);
+    return result;
   }
 
   @override

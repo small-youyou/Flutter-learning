@@ -134,7 +134,7 @@ class _LoginPageState extends State<LoginPage> {
 
   void _saveUserInfo(String id, String token) async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
-    // prefs.setString("id", id);
+    prefs.setString("id", id);
     prefs.setString("token", token);
     // prefs.setString("phone", _assount.text);
     // prefs.setString("password", _password.text);
@@ -146,8 +146,15 @@ class _LoginPageState extends State<LoginPage> {
     var rel2 = convert.jsonDecode(rel.data);
     var result = new UserItemModel.fromJson(rel2);
 
+    //===debug
+    result = new UserItemModel.fromJson({
+      "code": "200",
+      "token":
+          "+N6PSEp6cPDMad7e68GxGrTxq47Jn+UhuuSKJ1cFdRA=@9s7f.cn.rongnav.com;9s7f.cn.rongcfg.com"
+    });
+
     if (this.role == "user" && result.code == "200") {
-      _saveUserInfo("", "demotoken");
+      _saveUserInfo(id, result.token);
       Navigator.of(context).pushAndRemoveUntil(
           new MaterialPageRoute(builder: (context) => new Tabs()),
           (route) => route == null);

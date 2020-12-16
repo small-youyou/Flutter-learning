@@ -5,6 +5,7 @@ Map name = {
   "id": "手机号",
   "password": "密码",
   "job": "职务",
+  "right": "权限",
 };
 
 class UserDetails extends StatelessWidget {

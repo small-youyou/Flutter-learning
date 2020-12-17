@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:rich_edit/rich_edit.dart';
 import 'package:video_player/video_player.dart';
+import 'uploadFile.dart';
 
 class SimpleRichEditController extends RichEditController {
   Map<String, ChewieController> controllers = Map();
@@ -56,4 +57,52 @@ class SimpleRichEditController extends RichEditController {
   @override
   Widget generateImageView(RichEditData data) =>
       Image.file(File(data.data), height: 200, width: 300);
+
+//重写html函数
+
+  String generateHtml() {
+    StringBuffer sb = StringBuffer();
+    List<RichEditData> _data = getDataList();
+    _data.forEach((element) {
+      switch (element.type) {
+        case RichEditDataType.TEXT:
+          generateTextHtml(sb, element);
+          break;
+        case RichEditDataType.IMAGE:
+          generateImageHtml(sb, element);
+          break;
+        case RichEditDataType.VIDEO:
+          generateVideoHtml(sb, element);
+          break;
+      }
+    });
+    print(sb.toString());
+    return sb.toString();
+  }
+
+  void generateTextHtml(StringBuffer sb, RichEditData element) {
+    sb.write("<p>");
+    sb.write("<span style=\"font-size:30px;\">");
+    sb.write(element.data);
+    sb.write("<\/span>");
+    sb.write("<\/p>");
+  }
+
+  void generateImageHtml(StringBuffer sb, RichEditData element) {
+    UploadFile.fileUplod(element.data);
+
+    sb.write("<p>");
+    sb.write("<image style=\"padding: 10px;max-width: 90%;\" src=\"");
+    sb.write(element.data);
+    sb.write("\"/>");
+    sb.write("<\/p>");
+  }
+
+  void generateVideoHtml(StringBuffer sb, RichEditData element) {
+    sb.write("<p>");
+    sb.write('''
+          <video src="${element.data}" playsinline="true" webkit-playsinline="true" x-webkit-airplay="allow" airplay="allow" x5-video-player-type="h5" x5-video-player-fullscreen="true" x5-video-orientation="portrait" controls="controls"  style="width: 100%;height: 300px;"></video>
+          ''');
+    sb.write("<\/p>");
+  }
 }

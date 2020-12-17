@@ -177,11 +177,12 @@ class _MessageCreateState extends State<MessageCreate> {
     if (newTitleFormKey.currentState.validate()) {
 //标题含有关键词
 
-      Navigator.push(context, MaterialPageRoute(builder: (c) {
-        return Pre(
-          data: controller.generateHtml(),
-        );
-      }));
+      controller.generateHtml();
+      // Navigator.push(context, MaterialPageRoute(builder: (c) {
+      //   return Pre(
+      //     data: controller.generateHtml(),
+      //   );
+      // }));
       print("发送成功");
     }
   }

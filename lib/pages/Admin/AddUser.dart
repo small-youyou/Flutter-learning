@@ -1,9 +1,18 @@
 import 'package:flutter/material.dart';
 import 'package:weitong/widget/JdButton.dart';
 
-class AddUser extends StatelessWidget {
+class AddUser extends StatefulWidget {
+  AddUser({Key key}) : super(key: key);
+
+  @override
+  _AddUserState createState() => _AddUserState();
+}
+
+class _AddUserState extends State<AddUser> {
+  @override
   final newUserFormKey = GlobalKey<FormState>();
-  String id, password, name, job;
+  String id, password, name, job, right;
+  int rightValue;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -109,7 +118,41 @@ class AddUser extends StatelessWidget {
                   },
                   validator: _validateNewJob,
                 ),
-                Divider(),
+                DropdownButton(
+                    value: rightValue,
+                    isExpanded: true,
+                    hint: Text("请选择权限等级"),
+                    items: [
+                      DropdownMenuItem(
+                        child: Text('权限1'),
+                        value: 1,
+                      ),
+                      DropdownMenuItem(
+                        child: Text('权限2'),
+                        value: 2,
+                      ),
+                      DropdownMenuItem(
+                        child: Text('权限3'),
+                        value: 3,
+                      ),
+                      DropdownMenuItem(
+                        child: Text('权限4'),
+                        value: 4,
+                      ),
+                      DropdownMenuItem(
+                        child: Text('权限5'),
+                        value: 5,
+                      ),
+                      DropdownMenuItem(
+                        child: Text('权限6'),
+                        value: 6,
+                      ),
+                    ],
+                    onChanged: (value) => setState(() {
+                          rightValue = value;
+                        })),
+
+                // Divider(),
                 JdButton(
                   text: '确定',
                   cb: () {
@@ -153,12 +196,14 @@ class AddUser extends StatelessWidget {
 
   void _sendDataBack(BuildContext context) {
     newUserFormKey.currentState.save();
+    right = "权限1";
     if (newUserFormKey.currentState.validate()) {
       Map mapToSendBack = {
         "name": name,
         "id": id,
         "password": password,
         "job": job,
+        "right": right,
       };
       Navigator.pop(context, mapToSendBack);
     }

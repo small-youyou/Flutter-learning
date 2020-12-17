@@ -60,48 +60,54 @@ class SimpleRichEditController extends RichEditController {
 
 //重写html函数
 
-  String generateHtml() {
+  Future<String> generateHtmlUrl() async {
     StringBuffer sb = StringBuffer();
     List<RichEditData> _data = getDataList();
-    _data.forEach((element) {
+    for (int i = 0; i < _data.length; i++) {
+      RichEditData element = _data[i];
       switch (element.type) {
         case RichEditDataType.TEXT:
           generateTextHtml(sb, element);
           break;
         case RichEditDataType.IMAGE:
-          generateImageHtml(sb, element);
+          await generateImageHtmlUrl(sb, element);
           break;
         case RichEditDataType.VIDEO:
-          generateVideoHtml(sb, element);
+          await generateVideoHtmlUrl(sb, element);
           break;
       }
-    });
-    print(sb.toString());
+    }
+
+    print("html" + sb.toString());
     return sb.toString();
   }
 
-  void generateTextHtml(StringBuffer sb, RichEditData element) {
-    sb.write("<p>");
-    sb.write("<span style=\"font-size:30px;\">");
-    sb.write(element.data);
-    sb.write("<\/span>");
-    sb.write("<\/p>");
-  }
+  // void generateTextHtml(StringBuffer sb, RichEditData element) {
+  //   sb.write("<p>");
+  //   sb.write("<span style=\"font-size:30px;\">");
+  //   sb.write(element.data);
+  //   sb.write("<\/span>");
+  //   sb.write("<\/p>");
+  // }
 
-  void generateImageHtml(StringBuffer sb, RichEditData element) {
-    UploadFile.fileUplod(element.data);
+  Future<void> generateImageHtmlUrl(
+      StringBuffer sb, RichEditData element) async {
+    String url = await UploadFile.fileUplod(element.data);
 
     sb.write("<p>");
     sb.write("<image style=\"padding: 10px;max-width: 90%;\" src=\"");
-    sb.write(element.data);
+    sb.write(url);
     sb.write("\"/>");
     sb.write("<\/p>");
   }
 
-  void generateVideoHtml(StringBuffer sb, RichEditData element) {
+  Future<void> generateVideoHtmlUrl(
+      StringBuffer sb, RichEditData element) async {
+    String url = await UploadFile.fileUplod(element.data);
+
     sb.write("<p>");
     sb.write('''
-          <video src="${element.data}" playsinline="true" webkit-playsinline="true" x-webkit-airplay="allow" airplay="allow" x5-video-player-type="h5" x5-video-player-fullscreen="true" x5-video-orientation="portrait" controls="controls"  style="width: 100%;height: 300px;"></video>
+          <video src="${url}" playsinline="true" webkit-playsinline="true" x-webkit-airplay="allow" airplay="allow" x5-video-player-type="h5" x5-video-player-fullscreen="true" x5-video-orientation="portrait" controls="controls"  style="width: 100%;height: 300px;"></video>
           ''');
     sb.write("<\/p>");
   }

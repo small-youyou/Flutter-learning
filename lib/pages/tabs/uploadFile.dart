@@ -8,9 +8,9 @@ class UploadFile {
   static String netUploadUrl = "http://47.110.150.159:8080/upload";
 
   ///dio 实现文件上传
-  static void fileUplod(String localImagePath) async {
+  static Future<String> fileUplod(String localPath) async {
     ///创建Dio
-    List l = localImagePath.split("/");
+    List l = localPath.split("/");
     String fileName = l[l.length - 1];
     BaseOptions option = new BaseOptions(
         //     // baseUrl: API_PREFIX,
@@ -22,7 +22,7 @@ class UploadFile {
     // Dio dio = new Dio(option);
     Dio dio = new Dio(option);
     Map<String, dynamic> map = Map();
-    map["fileName"] = await MultipartFile.fromFile(localImagePath);
+    map["fileName"] = await MultipartFile.fromFile(localPath);
 
     // map["json"] = convert.jsonEncode({
     //   "keywords": "1",
@@ -48,6 +48,6 @@ class UploadFile {
 
     ///服务器响应结果
     print("url：" + response.data.toString());
-    return response.data;
+    return response.data.toString();
   }
 }

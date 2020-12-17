@@ -3,9 +3,8 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:rich_edit/rich_edit.dart';
-import 'package:webview_flutter/webview_flutter.dart';
 import 'package:weitong/widget/JdButton.dart';
-
+import 'package:flutter_html/flutter_html.dart';
 import 'SimpleRichEditController.dart';
 
 class MessageCreate extends StatefulWidget {
@@ -172,37 +171,38 @@ class _MessageCreateState extends State<MessageCreate> {
     }
   }
 
-  _sendMessage(SimpleRichEditController controller) {
+  _sendMessage(SimpleRichEditController controller) async {
     newTitleFormKey.currentState.save(); //测试标题是否含有关键词
     if (newTitleFormKey.currentState.validate()) {
 //标题含有关键词
-
-      controller.generateHtml();
-      // Navigator.push(context, MaterialPageRoute(builder: (c) {
-      //   return Pre(
-      //     data: controller.generateHtml(),
-      //   );
-      // }));
+      //这个htmlCode就是所有消息的HTML代码了
+      //或许我们可以加密了再传输？
+      var htmlCode = await controller.generateHtmlUrl();
+      print(htmlCode);
+      // controller.generateHtml();
+      //这里是用html初始化一个页面
+      Navigator.push(context, MaterialPageRoute(builder: (c) {
+        return Pre(
+          htmlCode: htmlCode,
+        );
+      }));
       print("发送成功");
     }
   }
 }
 
+//这个类在初始化时传入html代码就可以生成对应的页面了
 class Pre extends StatelessWidget {
-  final data;
+  final htmlCode;
 
-  Pre({Key key, this.data}) : super(key: key);
-
+  Pre({Key key, this.htmlCode}) : super(key: key);
+  @override
   @override
   Widget build(BuildContext context) {
-    final String contentBase64 =
-        base64Encode(const Utf8Encoder().convert(data));
+    print("html:" + htmlCode);
     return Scaffold(
       appBar: AppBar(),
-      body: WebView(
-        initialUrl: 'data:text/html;base64,$contentBase64',
-        javascriptMode: JavascriptMode.unrestricted,
-      ),
+      body: Html(data: htmlCode),
     );
   }
 }

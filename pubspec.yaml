@@ -37,6 +37,11 @@ dependencies:
   dio: ^3.0.10
   rongcloud_im_plugin: ^4.0.4+3
   flutter_simple_treeview: ^2.0.2
+  rich_edit: ^0.1.1
+  chewie: 0.9.10
+  video_player: 0.10.11
+  image_picker: 0.6.7
+  webview_flutter: ^0.3.10+4
 
 
 
